@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NavigationView"
+            android:name=".uiNavigation.NavigationScreen"
             android:label="@string/app_name"
             android:theme="@style/Theme.ProyectoFinalCM20242Gr01"/>
     </application>
