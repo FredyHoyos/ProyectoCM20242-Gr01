@@ -5,5 +5,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun DatosUsuario(){
-    Text("Nombre: Juan")
+    Text("Datos del usuario")
 }
