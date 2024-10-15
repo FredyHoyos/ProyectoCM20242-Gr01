@@ -1,37 +1,37 @@
 package com.example.proyectofinalcm20242_gr01.uiNavigation
 
 import android.widget.Toast
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.outlined.Check
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,41 +46,35 @@ import com.example.proyectofinalcm20242_gr01.viewMenu.Galeria
 fun NavigationScreen() {
     val navigationViewModel: NavigationViewModel = viewModel()
     val currentScreen = navigationViewModel.currentScreen.value
-    var expanded by remember { mutableStateOf(true) }
 
     Column {
-        // Menú desplegable
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = true }
-        ) {
-            DropdownMenuItem(text = { Text("Opción 1") }, onClick = {
-                navigationViewModel.navigateTo(NavigationUiState.ShowUserData)
-                expanded = true
-            })
-            DropdownMenuItem(
-                text = { Text("Opción 2") },onClick = {
-                    navigationViewModel.navigateTo(NavigationUiState.TakePhoto)
-                    expanded = false
-                })
-        }
-
-        DropDownMenu1()
-
         TopAppBar(
-            title = { },
+            title = {},
             actions = {
-                IconButton(onClick = { navigationViewModel.navigateTo(NavigationUiState.ShowUserData) }) {
-                    Icon(Icons.Filled.AccountCircle, contentDescription = "Datos Usuario")
-                }
-                IconButton(onClick = { navigationViewModel.navigateTo(NavigationUiState.TakePhoto) }) {
-                    Icon(Icons.Filled.Face, contentDescription = "Tomar foto")
-                }
-                IconButton(onClick = { navigationViewModel.navigateTo(NavigationUiState.OpenGallery) }) {
-                    Icon(Icons.Filled.Favorite, contentDescription = "Galería")
-                }
-                IconButton(onClick = { print("Delete") }) {
-                    Icon(Icons.Filled.Delete, contentDescription = "Eliminar")
+                // Usamos un Row para alinear los íconos
+                Row(
+                    modifier = Modifier
+                        .background(Color.Cyan)
+                        .fillMaxWidth()
+                        .weight(1f), // Para ocupar todo el espacio disponible
+                    horizontalArrangement = Arrangement.SpaceAround // Espacio entre los íconos
+                ) {
+                    IconButton(onClick = { navigationViewModel.navigateTo(NavigationUiState.ShowUserData) }) {
+                        Icon(Icons.Filled.AccountCircle, contentDescription = "Datos Usuario",
+                            tint = Color.Magenta)
+                    }
+                    IconButton(onClick = { navigationViewModel.navigateTo(NavigationUiState.TakePhoto) }) {
+                        Icon(Icons.Filled.Add, contentDescription = "Tomar foto",
+                            tint = Color.Blue)
+                    }
+                    IconButton(onClick = { navigationViewModel.navigateTo(NavigationUiState.OpenGallery) }) {
+                        Icon(Icons.Filled.Favorite, contentDescription = "Galería",
+                            tint = Color.Red)
+                    }
+                    IconButton(onClick = { print("Delete") }) {
+                        Icon(Icons.Filled.Delete, contentDescription = "Eliminar",
+                            tint = Color.Black)
+                    }
                 }
             }
         )
