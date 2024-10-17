@@ -1,6 +1,7 @@
 package com.example.proyectofinalcm20242_gr01.viewMenu
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Environment
@@ -10,11 +11,13 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
@@ -29,7 +32,8 @@ fun Camara() {
     var isCameraInitialized by remember { mutableStateOf(false) }
 
     val permissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission()) { isGranted ->
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
         hasCameraPermission = isGranted
         if (isGranted) isCameraInitialized = true
     }
@@ -42,13 +46,18 @@ fun Camara() {
 
     if (hasCameraPermission) {
         if (isCameraInitialized) {
-            Box {
+            Box(modifier = Modifier.fillMaxSize()) {
                 CameraPreview()
-                Button(onClick = { takePicture(context) }) {
+
+                Button(
+                    onClick = { showSaveDialog(context) },
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(110.dp)
+                ) {
                     Text("Tomar Foto")
                 }
             }
-
         }
     } else {
         Text("Esperando permiso de cámara...")
@@ -73,6 +82,20 @@ fun CameraPreview() {
         },
         modifier = Modifier.fillMaxSize()
     )
+}
+
+private fun showSaveDialog(context: Context) {
+    val builder = AlertDialog.Builder(context)
+    builder.setTitle("Guardar foto")
+    builder.setMessage("¿Quieres guardar la foto?")
+    builder.setPositiveButton("Sí") { _, _ ->
+        takePicture(context)  // Llama a la función que toma la foto
+    }
+    builder.setNegativeButton("No") { dialog, _ ->
+        dialog.dismiss()  // Cierra el diálogo sin hacer nada
+    }
+    val dialog = builder.create()
+    dialog.show()
 }
 
 private fun takePicture(context: Context) {

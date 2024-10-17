@@ -54,26 +54,26 @@ fun NavigationScreen() {
                 // Usamos un Row para alinear los íconos
                 Row(
                     modifier = Modifier
-                        .background(Color.Cyan)
+                        .background(Color.Blue)
                         .fillMaxWidth()
                         .weight(1f), // Para ocupar todo el espacio disponible
                     horizontalArrangement = Arrangement.SpaceAround // Espacio entre los íconos
                 ) {
                     IconButton(onClick = { navigationViewModel.navigateTo(NavigationUiState.ShowUserData) }) {
                         Icon(Icons.Filled.AccountCircle, contentDescription = "Datos Usuario",
-                            tint = Color.Magenta)
+                            tint = Color.White)
                     }
                     IconButton(onClick = { navigationViewModel.navigateTo(NavigationUiState.TakePhoto) }) {
                         Icon(Icons.Filled.Add, contentDescription = "Tomar foto",
-                            tint = Color.Blue)
+                            tint = Color.White)
                     }
                     IconButton(onClick = { navigationViewModel.navigateTo(NavigationUiState.OpenGallery) }) {
                         Icon(Icons.Filled.Favorite, contentDescription = "Galería",
-                            tint = Color.Red)
+                            tint = Color.White)
                     }
                     IconButton(onClick = { print("Delete") }) {
                         Icon(Icons.Filled.Delete, contentDescription = "Eliminar",
-                            tint = Color.Black)
+                            tint = Color.White)
                     }
                 }
             }

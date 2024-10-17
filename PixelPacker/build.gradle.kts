@@ -50,44 +50,56 @@ android {
 }
 
 dependencies {
+    // Camera
+    implementation("androidx.camera:camera-core:1.3.4")
+    implementation("androidx.camera:camera-camera2:1.3.4")
+    implementation("androidx.camera:camera-lifecycle:1.3.4")
+    implementation("androidx.camera:camera-view:1.0.0-alpha29")
+    
+    // Activity Compose
+    implementation(libs.androidx.activity.compose.v160)
+    implementation("androidx.activity:activity-compose:1.6.1")
 
-    implementation ("androidx.camera:camera-core:1.3.4")
-    implementation ("androidx.camera:camera-camera2:1.0.2")
-    implementation ("androidx.camera:camera-lifecycle:1.3.4")
-    implementation ("androidx.camera:camera-view:1.0.0-alpha29") // O la versión que estés usando
-    implementation (libs.androidx.activity.compose.v160) // O la versión que estés usando
+    // Fragment KTX
+    implementation("androidx.fragment:fragment-ktx:1.8.4")
 
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
-    //Para el ViewModels
+    // Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 
-    implementation ("androidx.camera:camera-camera2:1.3.4")
-    implementation ("androidx.camera:camera-lifecycle:1.3.4")
-    implementation ("androidx.camera:camera-view:1.3.4")
-    // Para el manejo de permisos
-    implementation ("androidx.activity:activity-compose:1.6.1")
+    // Compose UI
+    implementation("androidx.compose.ui:ui:1.5.0")
+    implementation("androidx.compose.material:material:1.5.0")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.5.0")
 
-    implementation ("androidx.compose.ui:ui:1.5.0")
-    implementation ("androidx.compose.material:material:1.5.0")
-    implementation ("androidx.compose.ui:ui-tooling-preview:1.5.0")
-    implementation ("androidx.activity:activity-compose:1.6.1" )
-
+    // KTX Libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+
+    // Compose BOM
     implementation(platform(libs.androidx.compose.bom))
+
+    // Additional UI Libraries
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+
+    // Testing Libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
+    // Debugging Libraries
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(kotlin("script-runtime"))
 
+    // Kotlin
+    implementation(kotlin("script-runtime"))
 }
